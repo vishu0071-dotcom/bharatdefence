@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://bharatdefence.site/sitemap.xml
+
+# Block system files
+Disallow: /automation/
+Disallow: /.github/
+Disallow: /.env
+Disallow: /node_modules/

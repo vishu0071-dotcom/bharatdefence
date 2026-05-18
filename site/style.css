@@ -1,0 +1,27 @@
+/* ═══════════════════════════════════════
+   BharatDefence.site — Shared Stylesheet
+   Used by: index.html + all article pages
+═══════════════════════════════════════ */
+:root {
+  --ink:#0d0f14; --slate:#3a3f55; --muted:#7b8099;
+  --faint:#f4f5f9; --border:#e3e5ef; --white:#fff;
+  --saffron:#e8601c; --saffron2:#c44e12; --saffron-bg:#fff2ec;
+  --navy:#182048; --navy-bg:#eef0f8;
+  --green:#1a7a4a; --green-bg:#e8f5ee;
+  --red:#c0362b; --gold:#b07d20;
+  --r:6px;
+  --sh:0 1px 4px rgba(13,15,20,.06),0 4px 16px rgba(13,15,20,.04);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+button { font-family: 'Inter', sans-serif; cursor: pointer; }
