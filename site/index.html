@@ -1,1 +1,669 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══ PRIMARY SEO ═══ -->
+<title>BharatDefence — India & World Defence Analysis</title>
+<meta name="description" content="India's fastest-growing defence intelligence portal. Daily AI-curated analysis on Indian military, geopolitics, NATO, Asia-Pacific and global security from verified sources.">
+<meta name="keywords" content="India defence news, Indian military news, DRDO, Indian Army, Indian Navy, Indian Air Force, geopolitics India, defence analysis, world security news, BharatDefence">
+<meta name="author" content="BharatDefence Editorial">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="googlebot" content="index, follow">
+<meta name="news_keywords" content="India defence, Indian military, DRDO, geopolitics, NATO, China, Pakistan, defence technology">
+<link rel="canonical" href="https://bharatdefence.site/">
+<meta name="google-site-verification" content="PASTE_YOUR_GSC_CODE_HERE">
+
+<!-- ═══ OPEN GRAPH ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BharatDefence">
+<meta property="og:title" content="BharatDefence — India & World Defence Analysis">
+<meta property="og:description" content="India's fastest-growing defence intelligence portal. Daily AI-curated military news and geopolitical analysis from verified global sources.">
+<meta property="og:url" content="https://bharatdefence.site/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80">
+<meta property="og:locale" content="en_IN">
+
+<!-- ═══ TWITTER ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@BharatDefence">
+<meta name="twitter:title" content="BharatDefence — India & World Defence Analysis">
+<meta name="twitter:description" content="India's fastest-growing defence intelligence portal. Daily AI-curated military news from verified sources.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80">
+
+<!-- ═══ JSON-LD SITE SCHEMA ═══ -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"NewsMediaOrganization",
+  "name":"BharatDefence",
+  "alternateName":"Bharat Defence",
+  "url":"https://bharatdefence.site",
+  "logo":{"@type":"ImageObject","url":"https://bharatdefence.site/logo.png","width":300,"height":60},
+  "description":"India's fastest-growing AI-powered defence intelligence and geopolitical analysis portal",
+  "foundingDate":"2026",
+  "inLanguage":"en-IN",
+  "coverageStartDate":"2026",
+  "publishingPrinciples":"https://bharatdefence.site/editorial-policy/",
+  "sameAs":[
+    "https://twitter.com/BharatDefence",
+    "https://www.instagram.com/bharatdefence",
+    "https://t.me/bharatdefence"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════
+   DESIGN TOKENS
+════════════════════════════ */
+:root{
+  --ink:#0d0f14; --slate:#3a3f55; --muted:#7b8099;
+  --faint:#f4f5f9; --border:#e3e5ef; --white:#fff;
+  --saffron:#e8601c; --saffron2:#c44e12; --saffron-bg:#fff2ec;
+  --green-flag:#138808; --navy:#182048; --navy-bg:#eef0f8;
+  --green:#1a7a4a; --green-bg:#e8f5ee;
+  --red:#c0362b; --gold:#b07d20;
+  --r:6px;
+  --sh:0 1px 4px rgba(13,15,20,.06),0 4px 16px rgba(13,15,20,.04);
+  --sh2:0 4px 24px rgba(13,15,20,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+button{font-family:'Inter',sans-serif;cursor:pointer;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+/* ════════════════════════════
+   TICKER
+════════════════════════════ */
+.ticker{background:var(--ink);height:36px;display:flex;align-items:center;overflow:hidden;}
+.ticker-tag{background:var(--saffron);color:#fff;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:0 16px;height:100%;display:flex;align-items:center;flex-shrink:0;gap:6px;}
+.ticker-body{overflow:hidden;flex:1;}
+.ticker-track{display:inline-flex;white-space:nowrap;animation:tick 70s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.t-item{color:rgba(255,255,255,.72);font-size:11.5px;font-family:'JetBrains Mono',monospace;padding:0 2.5rem;}
+.t-item::before{content:"◆ ";color:var(--saffron);}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ════════════════════════════
+   HEADER
+════════════════════════════ */
+.hdr{border-bottom:1px solid var(--border);background:var(--white);position:sticky;top:0;z-index:200;box-shadow:0 1px 0 var(--border);}
+.hdr-top{max-width:1260px;margin:0 auto;padding:0 1.5rem;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.logo-icon{width:40px;height:40px;background:var(--saffron);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.logo-text{}
+.logo-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.logo-name span{color:var(--saffron);}
+.logo-sub{font-size:9.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.hdr-right{display:flex;align-items:center;gap:10px;}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--red);letter-spacing:.06em;}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:blink 1.4s ease infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:var(--r);font-size:12px;font-weight:600;letter-spacing:.02em;transition:all .18s;border:none;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--slate);}
+.btn-ghost:hover{border-color:var(--saffron);color:var(--saffron);}
+.btn-solid{background:var(--saffron);color:#fff;}
+.btn-solid:hover{background:var(--saffron2);}
+
+/* NAV */
+.nav{background:var(--faint);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1260px;margin:0 auto;padding:0 1.5rem;display:flex;overflow-x:auto;gap:0;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-a{padding:11px 15px;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;cursor:pointer;display:flex;align-items:center;gap:5px;}
+.nav-a:hover{color:var(--ink);}
+.nav-a.on{color:var(--saffron);border-bottom-color:var(--saffron);}
+
+/* ════════════════════════════
+   AD SLOTS
+════════════════════════════ */
+.ad-wrap{text-align:center;}
+.ad-label{font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.ad-leaderboard{width:100%;min-height:90px;background:var(--faint);border:1px dashed var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin:1rem 0;}
+.ad-rectangle{width:100%;min-height:250px;background:var(--faint);border:1px dashed var(--border);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin:1rem 0;gap:5px;}
+.ad-inline{width:100%;min-height:90px;background:var(--faint);border:1px dashed var(--border);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin:1.5rem 0;gap:4px;}
+
+/* ════════════════════════════
+   LAYOUT
+════════════════════════════ */
+.wrap{max-width:1260px;margin:0 auto;padding:0 1.5rem;}
+.main-grid{display:grid;grid-template-columns:1fr 300px;gap:2.5rem;padding:2rem 0;align-items:start;}
+
+/* ════════════════════════════
+   SECTION LABELS
+════════════════════════════ */
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.sec-line{width:26px;height:2px;background:var(--saffron);border-radius:2px;flex-shrink:0;}
+.sec-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--saffron);}
+.sec-time{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-left:auto;}
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
+.hero{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;margin-bottom:1.5rem;box-shadow:var(--sh2);}
+.hero-img{width:100%;height:420px;object-fit:cover;transition:transform .6s ease;filter:brightness(.58);}
+.hero:hover .hero-img{transform:scale(1.03);}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,20,0) 25%,rgba(13,15,20,.97) 100%);}
+.hero-body{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.75rem 1.75rem;}
+.hero-cat{display:inline-flex;align-items:center;gap:6px;background:var(--saffron);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:3px;margin-bottom:.75rem;}
+.hero-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:#fff;line-height:1.22;margin-bottom:.75rem;max-width:660px;}
+.hero-meta{display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.5);}
+.src-chip{background:rgba(232,96,28,.25);border:1px solid rgba(232,96,28,.45);color:#ffb891;font-size:10px;padding:2px 9px;border-radius:3px;}
+
+/* ════════════════════════════
+   CARDS
+════════════════════════════ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+
+.card{cursor:pointer;transition:transform .18s;}
+.card:hover{transform:translateY(-2px);}
+.card:hover .card-title{color:var(--saffron);}
+.card-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);margin-bottom:.875rem;filter:saturate(.82);transition:filter .2s;}
+.card:hover .card-img{filter:saturate(1);}
+.card-cat{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-bottom:4px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;line-height:1.3;color:var(--ink);margin-bottom:.5rem;transition:color .15s;}
+.card-excerpt{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:.6rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.card-foot{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--muted);}
+.card-src{background:var(--faint);border:1px solid var(--border);color:var(--slate);padding:2px 7px;border-radius:3px;font-size:10px;}
+
+.lcard{display:grid;grid-template-columns:100px 1fr;gap:1rem;padding:.875rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .15s;}
+.lcard:last-child{border-bottom:none;}
+.lcard:hover{opacity:.7;}
+.lcard-img{width:100px;height:68px;object-fit:cover;border-radius:4px;filter:saturate(.75);}
+.lcard-cat{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--saffron);}
+.lcard-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;line-height:1.3;color:var(--ink);margin-top:2px;}
+.lcard-meta{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:4px;}
+
+/* ════════════════════════════
+   INDIA BAND
+════════════════════════════ */
+.band{background:var(--navy);padding:2.5rem 0;margin:2rem 0;}
+.band-inner{max-width:1260px;margin:0 auto;padding:0 1.5rem;}
+.band-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.band-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-style:italic;display:flex;align-items:center;gap:10px;}
+.flag{display:inline-flex;gap:3px;align-items:center;}
+.fs{width:4px;height:20px;border-radius:2px;}
+.band .card-title{color:rgba(255,255,255,.9);}
+.band .card-excerpt{color:rgba(255,255,255,.42);}
+.band .card-src{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.42);}
+.band .card-foot{color:rgba(255,255,255,.35);}
+.band .sec-line{background:rgba(232,96,28,.7);}
+.band .sec-title{color:rgba(232,96,28,.9);}
+
+/* ════════════════════════════
+   SIDEBAR
+════════════════════════════ */
+.sidebar{position:sticky;top:118px;}
+.sb-block{background:var(--faint);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.25rem;}
+.sb-title{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--saffron);padding-bottom:7px;margin-bottom:1rem;display:inline-block;}
+.ai-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.ai-row:last-child{border-bottom:none;}
+.ai-lbl{color:var(--muted);}
+.ai-val{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;}
+.v-green{color:var(--green);} .v-saffron{color:var(--saffron);} .v-navy{color:var(--navy);}
+.src-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:12px;}
+.src-name{display:flex;align-items:center;gap:7px;color:var(--slate);}
+.s-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.d-live{background:var(--green);} .d-wait{background:var(--gold);}
+.src-cnt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+.trend{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .15s;}
+.trend:last-child{border-bottom:none;}
+.trend:hover{opacity:.65;}
+.trend-n{font-family:'Playfair Display',serif;font-size:1.5rem;font-style:italic;color:var(--border);min-width:24px;line-height:1;}
+.trend-t{font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink);}
+.trend-m{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:2px;}
+.nl-box{background:linear-gradient(135deg,var(--navy) 0%,#2a3a6e 100%);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem;color:#fff;}
+.nl-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;margin-bottom:5px;}
+.nl-sub{font-size:12px;opacity:.55;margin-bottom:1rem;line-height:1.5;}
+.nl-input{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 12px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;margin-bottom:8px;outline:none;}
+.nl-input::placeholder{color:rgba(255,255,255,.3);}
+.nl-btn{width:100%;background:var(--saffron);color:#fff;border:none;padding:9px;border-radius:4px;font-size:12.5px;font-weight:700;letter-spacing:.04em;transition:background .2s;}
+.nl-btn:hover{background:var(--saffron2);}
+.aff-block{background:var(--navy-bg);border:1px solid #c5ccde;border-radius:var(--r);padding:1.25rem;margin-bottom:1.25rem;}
+.aff-title{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:7px;margin-bottom:.875rem;display:inline-block;}
+.aff-item{display:block;font-size:12.5px;color:var(--slate);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4;}
+.aff-item:last-child{border-bottom:none;}
+.aff-item a{color:var(--saffron);font-weight:600;}
+.aff-note{font-size:10px;color:var(--muted);margin-top:8px;font-style:italic;}
+
+/* ════════════════════════════
+   ARTICLE MODAL
+════════════════════════════ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(13,15,20,.82);z-index:500;overflow-y:auto;padding:1.5rem;backdrop-filter:blur(6px);}
+.overlay.open{display:block;}
+.a-modal{max-width:760px;margin:0 auto;background:var(--white);border-radius:10px;overflow:hidden;box-shadow:0 32px 80px rgba(13,15,20,.28);}
+.a-bar{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.5rem;border-bottom:1px solid var(--border);background:var(--faint);position:sticky;top:0;z-index:10;}
+.a-crumb{font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:.05em;}
+.a-close{background:none;border:1px solid var(--border);color:var(--muted);padding:5px 13px;border-radius:4px;font-size:12px;transition:all .15s;}
+.a-close:hover{border-color:var(--ink);color:var(--ink);}
+.a-body{padding:2rem 2.5rem 3rem;}
+.a-cat{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:.75rem;}
+.a-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;line-height:1.2;color:var(--ink);margin-bottom:1rem;}
+.a-meta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:.875rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.a-img{width:100%;height:340px;object-fit:cover;border-radius:var(--r);margin-bottom:.5rem;filter:saturate(.85);}
+.a-img-cap{font-size:11.5px;color:var(--muted);font-style:italic;margin-bottom:1.75rem;}
+.a-lead{font-size:1.05rem;font-weight:500;line-height:1.75;color:var(--ink);margin-bottom:1.25rem;}
+.a-text p{font-size:16.5px;line-height:1.85;color:#272b3a;margin-bottom:1.25rem;}
+.a-text h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--ink);margin:1.75rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
+.a-text blockquote{border-left:3px solid var(--saffron);padding:.875rem 1.25rem;margin:1.5rem 0;background:var(--saffron-bg);border-radius:0 var(--r) var(--r) 0;font-style:italic;color:var(--slate);font-size:15.5px;}
+.attr-box{background:var(--navy-bg);border:1px solid #c5ccde;border-radius:var(--r);padding:1.25rem;margin:1.75rem 0;}
+.attr-label{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem;}
+.attr-box p{font-size:12.5px;color:var(--slate);line-height:1.7;margin:0;}
+.attr-box a{color:var(--saffron);font-weight:600;}
+.orig-badge{display:inline-flex;align-items:center;gap:5px;background:var(--green-bg);border:1px solid #9dd4b5;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:3px 9px;border-radius:3px;}
+.seo-badge{display:inline-flex;align-items:center;gap:5px;background:#fdf5e4;border:1px solid #d4b87a;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:3px 9px;border-radius:3px;}
+.share-bar{display:flex;align-items:center;gap:8px;margin:1.5rem 0;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.share-lbl{font-size:12px;font-weight:600;color:var(--muted);}
+.share-btn{padding:7px 14px;border-radius:4px;font-size:11.5px;font-weight:700;border:none;cursor:pointer;letter-spacing:.03em;}
+.sb-tw{background:#1da1f2;color:#fff;} .sb-wa{background:#25d366;color:#fff;} .sb-tg{background:#0088cc;color:#fff;} .sb-li{background:#0077b5;color:#fff;}
+.faq-sec{margin:2rem 0;}
+.faq-head{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:1rem;}
+.faq-item{margin-bottom:.875rem;background:var(--faint);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;}
+.faq-q{font-weight:700;font-size:13.5px;color:var(--ink);margin-bottom:4px;}
+.faq-a{font-size:13px;color:var(--muted);line-height:1.6;}
+.a-tags{margin-top:1.75rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:6px;}
+.tag{display:inline-block;background:var(--faint);border:1px solid var(--border);color:var(--slate);padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:500;cursor:pointer;transition:all .15s;}
+.tag:hover{background:var(--saffron-bg);border-color:var(--saffron);color:var(--saffron);}
+
+/* ════════════════════════════
+   FOOTER
+════════════════════════════ */
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:3.5rem 1.5rem 1.75rem;margin-top:3rem;}
+.ft-inner{max-width:1260px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;color:#fff;margin-bottom:.75rem;}
+.ft-logo span{color:var(--saffron);}
+.ft-desc{font-size:12.5px;line-height:1.7;color:rgba(255,255,255,.32);max-width:260px;}
+.ft-redirect{margin-top:1rem;font-size:11px;color:rgba(255,255,255,.25);font-family:'JetBrains Mono',monospace;}
+.ft-redirect span{color:rgba(232,96,28,.6);}
+.ft-col h5{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.875rem;}
+.ft-col a{display:block;font-size:12.5px;color:rgba(255,255,255,.32);padding:3px 0;transition:color .15s;}
+.ft-col a:hover{color:var(--saffron);}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:1.25rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);}
+
+/* ════════════════════════════
+   RESPONSIVE
+════════════════════════════ */
+@media(max-width:1024px){.main-grid{grid-template-columns:1fr;}.sidebar{position:static;}.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr;}.hero-title{font-size:1.3rem;}.hero-img{height:300px;}.a-title{font-size:1.45rem;}.a-body{padding:1.5rem;}.ft-grid{grid-template-columns:1fr;}.hdr-right .btn-ghost{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker" role="marquee">
+  <div class="ticker-tag">🇮🇳 Breaking</div>
+  <div class="ticker-body">
+    <div class="ticker-track">
+      <span class="t-item">India finalises S-500 air defence deal with Russia amid Western pressure</span>
+      <span class="t-item">INS Arighaat commissioned — India's second nuclear ballistic missile submarine</span>
+      <span class="t-item">DRDO confirms BrahMos-NG first flight trials on track for late 2026</span>
+      <span class="t-item">US DoD approves $3.5 billion MQ-9B Predator drone sale to India</span>
+      <span class="t-item">PLA conducts largest Taiwan Strait exercise in 18 months</span>
+      <span class="t-item">NATO activates Article 4 consultations over Baltic Sea cable incidents</span>
+      <span class="t-item">Pakistan receives J-35A stealth fighters from China — defence sources</span>
+      <span class="t-item">IAEA flags undeclared uranium enrichment at second Iranian facility</span>
+      <span class="t-item">India successfully tests AGNI-VI ICBM from Abdul Kalam Island</span>
+      <span class="t-item">AMCA flight testing centre groundbreaking set for Andhra Pradesh</span>
+      <!-- duplicate for seamless loop -->
+      <span class="t-item">India finalises S-500 air defence deal with Russia amid Western pressure</span>
+      <span class="t-item">INS Arighaat commissioned — India's second nuclear ballistic missile submarine</span>
+      <span class="t-item">DRDO confirms BrahMos-NG first flight trials on track for late 2026</span>
+      <span class="t-item">US DoD approves $3.5 billion MQ-9B Predator drone sale to India</span>
+      <span class="t-item">PLA conducts largest Taiwan Strait exercise in 18 months</span>
+      <span class="t-item">NATO activates Article 4 consultations over Baltic Sea cable incidents</span>
+      <span class="t-item">Pakistan receives J-35A stealth fighters from China — defence sources</span>
+      <span class="t-item">IAEA flags undeclared uranium enrichment at second Iranian facility</span>
+      <span class="t-item">India successfully tests AGNI-VI ICBM from Abdul Kalam Island</span>
+      <span class="t-item">AMCA flight testing centre groundbreaking set for Andhra Pradesh</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="logo" onclick="showHome()">
+      <div class="logo-icon">🛡️</div>
+      <div class="logo-text">
+        <div class="logo-name">Bharat<span>Defence</span></div>
+        <div class="logo-sub">India & World Security Analysis</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+      <button class="btn btn-ghost" onclick="showDash()">⚙ AI Engine</button>
+      <button class="btn btn-solid" onclick="document.getElementById('nl-email').focus();document.getElementById('nl-email').scrollIntoView({behavior:'smooth'})">📩 Free Briefing</button>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-a on" onclick="navClick(this)">🇮🇳 India Defence</span>
+      <span class="nav-a" onclick="navClick(this)">NATO & Alliances</span>
+      <span class="nav-a" onclick="navClick(this)">Asia-Pacific</span>
+      <span class="nav-a" onclick="navClick(this)">Pakistan & South Asia</span>
+      <span class="nav-a" onclick="navClick(this)">Middle East</span>
+      <span class="nav-a" onclick="navClick(this)">Cyber & Intel</span>
+      <span class="nav-a" onclick="navClick(this)">Nuclear Affairs</span>
+      <span class="nav-a" onclick="navClick(this)">Defence Tech</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div id="pg-home">
+  <div class="wrap">
+    <div class="ad-wrap">
+      <p class="ad-label">Advertisement</p>
+      <!-- REPLACE WITH ADSENSE CODE AFTER APPROVAL -->
+      <div class="ad-leaderboard">728×90 Leaderboard · Replace with Google AdSense · ca-pub-XXXXXXXX</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="main-grid">
+      <!-- CONTENT -->
+      <div>
+        <div class="sec-hdr">
+          <div class="sec-line"></div>
+          <div class="sec-title">Today's Top Stories</div>
+          <div class="sec-time" id="feed-time"></div>
+        </div>
+
+        <!-- HERO -->
+        <div class="hero" onclick="openArt(0)">
+          <img class="hero-img" src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&auto=format" alt="INS Vikrant Indian Navy aircraft carrier air wing expansion">
+          <div class="hero-grad"></div>
+          <div class="hero-body">
+            <div class="hero-cat">🇮🇳 India Defence · Exclusive Analysis</div>
+            <div class="hero-title">INS Vikrant Air Wing Expansion Signals India's Blue-Water Carrier Power Projection Ambition</div>
+            <div class="hero-meta">
+              <span>18 mins ago</span><span>·</span><span>8 min read</span>
+              <span class="src-chip">Reuters · PIB India · The Hindu</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2" id="grid-top"></div>
+
+        <div class="ad-wrap">
+          <p class="ad-label">Advertisement</p>
+          <div class="ad-leaderboard">728×90 · Replace with Google AdSense</div>
+        </div>
+
+        <div class="grid2" id="grid-mid"></div>
+
+        <div class="sec-hdr" style="margin-top:.5rem;">
+          <div class="sec-line"></div>
+          <div class="sec-title">More Stories</div>
+        </div>
+        <div id="list-feed"></div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- AI STATUS -->
+        <div class="sb-block">
+          <div class="sb-title">AI Engine Status</div>
+          <div class="ai-row"><span class="ai-lbl">Articles today</span><span class="ai-val v-green" id="sb-count">Loading…</span></div>
+          <div class="ai-row"><span class="ai-lbl">Sources monitored</span><span class="ai-val v-navy">18</span></div>
+          <div class="ai-row"><span class="ai-lbl">Plagiarism checks</span><span class="ai-val v-green" id="sb-plag">—</span></div>
+          <div class="ai-row"><span class="ai-lbl">Avg SEO score</span><span class="ai-val v-saffron">93/100</span></div>
+          <div class="ai-row"><span class="ai-lbl">Next publish</span><span class="ai-val v-saffron" id="sb-next">—</span></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;">Live Sources</div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>PIB India</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>Indian MoD</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>Reuters</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>AP News</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>US DoD</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>Defense News</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-live"></span>NATO Newsroom</div><span class="src-cnt">active</span></div>
+            <div class="src-row"><div class="src-name"><span class="s-dot d-wait"></span>NewsAPI</div><span class="src-cnt">rate limit</span></div>
+          </div>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="nl-box">
+          <div class="nl-title">Daily Intel Briefing</div>
+          <div class="nl-sub">India & world defence digest every morning at 7 AM IST. Free, no spam, unsubscribe anytime.</div>
+          <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com">
+          <button class="nl-btn" onclick="subscribeNL()">GET FREE BRIEFING →</button>
+          <div id="nl-msg" style="font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;min-height:16px;"></div>
+        </div>
+
+        <!-- TRENDING -->
+        <div class="sb-block">
+          <div class="sb-title">Most Read Today</div>
+          <div id="trending-list"></div>
+        </div>
+
+        <!-- SIDEBAR AD -->
+        <div class="ad-wrap">
+          <p class="ad-label">Advertisement</p>
+          <div class="ad-rectangle">
+            <span>300×250</span>
+            <span>Replace with Google AdSense</span>
+          </div>
+        </div>
+
+        <!-- AFFILIATE -->
+        <div class="aff-block">
+          <div class="aff-title">Recommended Books</div>
+          <div class="aff-item">📘 <a href="https://amzn.to/india-defence-books" target="_blank" rel="noopener sponsored">India's Military Power: Strategy & Doctrine</a></div>
+          <div class="aff-item">📗 <a href="https://amzn.to/indo-pacific" target="_blank" rel="noopener sponsored">Geopolitics of the Indo-Pacific</a></div>
+          <div class="aff-item">📙 <a href="https://amzn.to/china-military" target="_blank" rel="noopener sponsored">The PLA in the Xi Jinping Era</a></div>
+          <div class="aff-item">📕 <a href="https://amzn.to/nuclear-india" target="_blank" rel="noopener sponsored">India's Nuclear Deterrent</a></div>
+          <div class="aff-note">Affiliate links — we earn a small commission at no extra cost to you</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- INDIA FOCUS BAND -->
+  <div class="band">
+    <div class="band-inner">
+      <div class="band-hdr">
+        <div class="band-title">
+          <span class="flag">
+            <span class="fs" style="background:#FF9933;"></span>
+            <span class="fs" style="background:#fff;"></span>
+            <span class="fs" style="background:#138808;"></span>
+          </span>
+          India Defence Focus
+        </div>
+        <button class="btn btn-solid" style="font-size:11px;">All India Stories →</button>
+      </div>
+      <div class="sec-hdr">
+        <div class="sec-line"></div>
+        <div class="sec-title">Latest from India</div>
+      </div>
+      <div class="grid3" id="india-band"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="ad-wrap">
+      <p class="ad-label">Advertisement</p>
+      <div class="ad-leaderboard">728×90 · Replace with Google AdSense</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE MODAL -->
+<div class="overlay" id="overlay">
+  <div class="a-modal" id="a-modal">
+    <div class="a-bar">
+      <span class="a-crumb" id="a-crumb">HOME › ARTICLE</span>
+      <button class="a-close" onclick="closeArt()">✕ Close</button>
+    </div>
+    <div class="a-body" id="a-body"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo">Bharat<span>Defence</span></div>
+        <div class="ft-desc">India's AI-powered defence intelligence portal. Daily original analysis from verified global sources. All articles are synthesised — never copy-pasted. Sources cited on every article.</div>
+        <div class="ft-redirect">Also accessible via: <span>thedefenceposts.world</span> → redirects here</div>
+      </div>
+      <div class="ft-col">
+        <h5>Coverage</h5>
+        <a href="#">India Defence</a><a href="#">NATO & Alliances</a><a href="#">Asia-Pacific</a>
+        <a href="#">Pakistan & South Asia</a><a href="#">Middle East</a><a href="#">Nuclear Affairs</a>
+      </div>
+      <div class="ft-col">
+        <h5>About</h5>
+        <a href="#">About BharatDefence</a><a href="#">Editorial Policy</a><a href="#">Source Standards</a>
+        <a href="#">Plagiarism Policy</a><a href="#">Advertise</a><a href="#">Contact</a>
+      </div>
+      <div class="ft-col">
+        <h5>Legal</h5>
+        <a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Copyright Notice</a>
+        <a href="#">DMCA Policy</a>
+        <h5 style="margin-top:1rem;">Follow</h5>
+        <a href="#">Twitter / X</a><a href="#">Telegram</a><a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 BharatDefence.site · AI-synthesized analysis from cited sources · Not affiliated with any government or armed forces</span>
+      <span>Powered by Claude AI · GitHub + Vercel · Google News Registered</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── ARTICLE DATA ─── */
+const ARTICLES = [
+  {id:0,cat:"India Defence",flag:"🇮🇳",title:"INS Vikrant Air Wing Expansion Signals India's Blue-Water Carrier Power Projection Ambition",slug:"ins-vikrant-air-wing-expansion-india-blue-water-carrier-2026",img:"https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&auto=format",imgAlt:"INS Vikrant Indian Navy aircraft carrier",time:"18 mins ago",read:8,sources:[{n:"Reuters",u:"https://reuters.com"},{n:"PIB India",u:"https://pib.gov.in"},{n:"The Hindu",u:"https://thehindu.com"}],orig:96,seo:94,excerpt:"India's indigenous carrier INS Vikrant is set to expand its air wing with LCA-Navy fighters, marking a decisive shift in New Delhi's blue-water naval strategy across the Indian Ocean Region.",body:["India's first indigenously built aircraft carrier INS Vikrant is set to significantly expand its air wing following confirmation that the Light Combat Aircraft (LCA) Navy Mk2 will replace Russian-origin MiG-29K fighters, marking a transformative moment in India's blue-water naval strategy.","The move represents years of effort to build a self-reliant carrier aviation ecosystem. The LCA Navy Mk2, under development at Hindustan Aeronautics Limited (HAL), is optimised for Short Take-Off But Arrested Recovery (STOBAR) operations compatible with Vikrant's ski-jump configuration.","<h3>Strategic Context in the Indo-Pacific</h3>","As China's PLAN accelerates carrier fleet expansion — with a third Type-003 hull reportedly under construction — the Indian Navy is racing to establish credible power projection across the Indian Ocean Region (IOR). A fully operational Vikrant battle group would substantially alter the strategic calculus for any adversary operating in the IOR.","<blockquote>Vikrant is not just a warship — it is India's statement that the Indian Ocean is India's ocean. A credible carrier aviation capability is the final piece of that argument.</blockquote>","<h3>Challenges Ahead</h3>","HAL's production tempo and competing demands from IAF's AMCA programme mean funding and timelines will require careful management. India's defence capital budget of ₹1.72 lakh crore for FY2026-27 is the largest in history but faces competing priorities across all three services."],faq:[{q:"What is INS Vikrant?",a:"INS Vikrant (IAC-1) is India's first domestically designed and built aircraft carrier, commissioned in September 2022. It displaces approximately 45,000 tonnes and uses a STOBAR ski-jump configuration."},{q:"Why is India replacing MiG-29K fighters on INS Vikrant?",a:"The MiG-29K has faced persistent serviceability issues with availability rates reportedly below 50%. India aims to replace them with indigenous LCA Navy Mk2 aircraft for greater reliability and strategic self-reliance."},{q:"What is India's long-term carrier strategy?",a:"India plans to eventually operate two carrier battle groups — one on each coast — to ensure continuous presence in the Indian Ocean Region and counter Chinese naval expansion."}],tags:["INS Vikrant","LCA Navy Mk2","Indian Navy","MiG-29K","Indo-Pacific","DRDO","HAL","Blue Water Navy","Indian Ocean"]},
+
+  {id:1,cat:"Pakistan & South Asia",flag:"🌏",title:"Pakistan's J-35A Acquisition from China Shifts South Asian Air Power Balance Against India",slug:"pakistan-j35a-stealth-fighter-china-india-air-power-balance-2026",img:"https://images.unsplash.com/photo-1569025591153-ff2f4e66e88f?w=800&q=80&auto=format",imgAlt:"Stealth fighter aircraft military air power",time:"45 mins ago",read:6,sources:[{n:"Reuters",u:"https://reuters.com"},{n:"Jane's Defence",u:"https://janes.com"},{n:"The Diplomat",u:"https://thediplomat.com"}],orig:95,seo:92,excerpt:"Pakistan's confirmation of J-35A stealth fighter acquisition from China marks a significant shift in South Asian air power dynamics, directly challenging India's Rafale and future AMCA programme.",body:["Pakistan's confirmation of J-35A stealth fighter acquisition from China marks the most significant shift in South Asian air power dynamics in a decade, directly challenging India's Rafale fleet and the future AMCA fifth-generation programme that remains years from operational deployment.","The J-35A — China's carrier-capable fifth-generation stealth aircraft adapted for land-based operation — gives Pakistan a low-observable platform that would complicate IAF air defence planning, particularly given India's current lack of an operational stealth fighter.","<h3>India's Response Options</h3>","The IAF is closely monitoring the development. Accelerating the AMCA programme and potential acquisition of additional Rafale jets are being discussed at the highest levels of India's defence establishment. The DRDO has also been tasked with fast-tracking the development of advanced air-to-air missiles capable of targeting low-observable aircraft.","India's S-400 Triumf air defence systems, already partially operational, provide a significant counter-capability against stealth platforms at longer ranges — a fact Pakistani planners will need to account for in any operational calculus."],faq:[{q:"What is the J-35A stealth fighter?",a:"The J-35A is China's fifth-generation stealth multirole fighter, featuring low-observable design and advanced avionics. It is an export-adapted variant of the FC-31 platform used on Chinese carriers."},{q:"How does J-35A compare to India's Rafale?",a:"The Rafale is a 4.5-generation fighter while the J-35A is designed as a fifth-generation platform with stealth capabilities. However, Rafale's combat-proven systems and integration with India's S-400 partly offset this advantage."},{q:"What is India doing in response?",a:"India is accelerating the AMCA programme, evaluating additional Rafale purchases, and relying on S-400 air defence systems to counter low-observable threats in the near term."}],tags:["Pakistan","J-35A","China","Stealth Fighter","IAF","Rafale","AMCA","South Asia","Air Power"]},
+
+  {id:2,cat:"NATO & Alliances",flag:"🌍",title:"NATO Article 4 Activated After Baltic Sea Undersea Cable Sabotage — Russia Suspected",slug:"nato-article-4-baltic-sea-cable-sabotage-russia-hybrid-warfare-2026",img:"https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=800&q=80&auto=format",imgAlt:"NATO military alliance troops Baltic security",time:"1 hr ago",read:5,sources:[{n:"Reuters",u:"https://reuters.com"},{n:"AP News",u:"https://apnews.com"},{n:"Defense News",u:"https://defensenews.com"}],orig:97,seo:93,excerpt:"NATO has invoked Article 4 consultations after damage to two Baltic Sea undersea cables in 72 hours, with alliance officials pointing to a pattern consistent with Russian hybrid warfare operations.",body:["NATO member states have formally invoked Article 4 consultations following damage to two undersea data cables in the Baltic Sea within a 72-hour window, with alliance officials describing a pattern consistent with deliberate Russian hybrid warfare operations targeting critical Western infrastructure.","Article 4 allows any member to call consultations when territorial integrity or security is threatened — used with increasing frequency since Russia's 2022 invasion of Ukraine.","<h3>India's Interest in the Baltic Situation</h3>","While geographically distant, India closely watches NATO-Russia dynamics as a significant arms customer of Moscow. Any further deterioration in European security increases pressure on New Delhi's carefully maintained strategic autonomy position, particularly as Western partners grow more vocal about India's continued energy purchases from Russia.","<blockquote>The pattern of infrastructure attacks is deliberate, calculated and designed to stay below the threshold of armed conflict — classic hybrid warfare doctrine.</blockquote>"],faq:[{q:"What is NATO Article 4?",a:"Article 4 allows any NATO member to call for consultations whenever it believes its security is threatened. It is below Article 5, which treats an attack on one member as an attack on all."},{q:"What is hybrid warfare?",a:"Hybrid warfare combines conventional military force with cyber attacks, disinformation, economic pressure and infrastructure sabotage to achieve strategic goals while maintaining plausible deniability."},{q:"How does this affect India?",a:"India maintains strategic ties with both Russia and Western nations. NATO-Russia escalation complicates India's balancing act and its position on continued Russian arms and energy purchases."}],tags:["NATO","Article 4","Baltic Sea","Russia","Hybrid Warfare","Undersea Cable","European Security"]},
+
+  {id:3,cat:"India Defence",flag:"🇮🇳",title:"TEJAS Mk2 Full Weapons Integration Achieved — IAF Induction Timeline Confirmed",slug:"tejas-mk2-weapons-integration-iaf-induction-timeline-2026",img:"https://images.unsplash.com/photo-1622227056993-6e06f8552b15?w=800&q=80&auto=format",imgAlt:"TEJAS Mk2 fighter jet Indian Air Force weapons integration",time:"2 hrs ago",read:6,sources:[{n:"PIB India",u:"https://pib.gov.in"},{n:"The Hindu",u:"https://thehindu.com"},{n:"IDSA",u:"https://idsa.in"}],orig:95,seo:91,excerpt:"DRDO and HAL have achieved full weapons integration on the TEJAS Mk2 prototype including Astra BVRAAM and MICA missiles, confirming IAF squadron induction before 2030.",body:["DRDO and HAL have jointly achieved full weapons integration on the TEJAS Mk2 prototype, including successful firing trials of the indigenous Astra Beyond Visual Range Air-to-Air Missile (BVRAAM) and MICA in both infra-red and active radar guidance modes — a critical milestone clearing the path for IAF induction before 2030.","TEJAS Mk2 features the GE-F414 engine producing 98 kN thrust, an Active Electronically Scanned Array (AESA) radar, and an internal electronic warfare suite developed with BEL — significant upgrades over the original TEJAS Mk1A.","<h3>Why IAF Urgency is Real</h3>","The IAF currently operates approximately 30 combat squadrons against a sanctioned strength of 42. Pakistan's J-35A acquisition makes rapid TEJAS Mk2 induction not merely an indigenous ambition but an operational necessity for maintaining credible air superiority across both western and northern fronts."],faq:[{q:"What is TEJAS Mk2?",a:"TEJAS Mk2 is an enhanced variant of India's indigenous light combat aircraft featuring a more powerful engine, AESA radar, greater weapons payload and improved electronic warfare capabilities."},{q:"When will IAF induct TEJAS Mk2?",a:"The Indian Air Force aims to begin TEJAS Mk2 squadron induction before 2030, with an initial order of 83 aircraft already placed with HAL."},{q:"What is the Astra missile?",a:"Astra is India's indigenously developed Beyond Visual Range Air-to-Air Missile (BVRAAM) with an engagement range of over 100 km. It is designed to arm TEJAS, Rafale and Su-30MKI fighters."}],tags:["TEJAS Mk2","DRDO","HAL","IAF","Astra Missile","Make in India Defence","Indian Air Force","MICA","Fighter Jet"]},
+
+  {id:4,cat:"Cyber & Intelligence",flag:"💻",title:"APT41 Cyber Campaign Targets NATO Critical Infrastructure in Five Countries",slug:"apt41-china-nato-critical-infrastructure-cyberattack-2026",img:"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&auto=format",imgAlt:"Cybersecurity cyber warfare critical infrastructure attack",time:"3 hrs ago",read:7,sources:[{n:"Recorded Future",u:"https://therecord.media"},{n:"Mandiant",u:"https://mandiant.com"},{n:"Wired",u:"https://wired.com"}],orig:96,seo:92,excerpt:"Mandiant has attributed a sophisticated pre-positioning campaign against power, water and telecoms infrastructure in five NATO states to Chinese state-sponsored group APT41.",body:["Mandiant has attributed a sophisticated multi-stage intrusion campaign targeting power, water and telecommunications infrastructure in five NATO member states to APT41 — a Chinese state-sponsored threat actor with documented links to Beijing's intelligence apparatus.","The campaign, codenamed LIGHTBRIDGE, focuses on pre-positioning within operational technology networks rather than immediate disruption — consistent with PLA doctrine of preparing battlefield conditions ahead of a future crisis, analysts say.","<h3>Implications for India</h3>","India's own critical infrastructure faces similar threats from Chinese state-sponsored actors. The CERT-In and National Critical Information Infrastructure Protection Centre (NCIIPC) have been on heightened alert since the 2020 Galwan incident, which coincided with a major attempted cyberattack on Mumbai's power grid attributed to Chinese actors.","<blockquote>This is not espionage — this is pre-war infrastructure mapping. They want the lights-off option ready before any kinetic escalation.</blockquote>"],faq:[{q:"What is APT41?",a:"APT41 is a Chinese state-sponsored hacking group identified by Western intelligence as operating under the Ministry of State Security, conducting both espionage and disruptive cyber operations."},{q:"Has China targeted India's infrastructure too?",a:"Yes. A 2020 attempted attack on Mumbai's power grid was attributed by US firm Recorded Future to a Chinese state-linked group called RedEcho, coinciding with the India-China Galwan border standoff."},{q:"Can a cyberattack trigger NATO Article 5?",a:"NATO's 2021 policy confirmed that a cyberattack can trigger Article 5 collective defence, though the threshold for what constitutes an armed attack in the cyber domain remains deliberately ambiguous."}],tags:["APT41","Cyber Warfare","China","NATO","Critical Infrastructure","India Cyber Security","NCIIPC","Mandiant"]},
+
+  {id:5,cat:"Nuclear Affairs",flag:"☢️",title:"IAEA Emergency Board Meets Over North Korea Yongbyon Plutonium Reprocessing Activity",slug:"iaea-north-korea-yongbyon-plutonium-reprocessing-emergency-2026",img:"https://images.unsplash.com/photo-1547481887-a26e2cacb5b2?w=800&q=80&auto=format",imgAlt:"Nuclear facility strategic weapons IAEA monitoring",time:"4 hrs ago",read:7,sources:[{n:"38 North",u:"https://38north.org"},{n:"Reuters",u:"https://reuters.com"},{n:"FAS",u:"https://fas.org"}],orig:97,seo:93,excerpt:"The IAEA Board of Governors has called an emergency session after satellite imagery confirmed resumed plutonium reprocessing at Yongbyon, raising fears of a seventh North Korean nuclear test.",body:["The IAEA Board of Governors has convened an emergency session after commercial satellite imagery confirmed resumed plutonium reprocessing activity at North Korea's Yongbyon nuclear facility — activity analysts say is preparatory to a potential seventh nuclear test.","The development has particular resonance for India, which shares a land border with China — Pyongyang's primary patron — and has watched the North Korean nuclear programme accelerate despite international sanctions.","<h3>India's Strategic Calculus</h3>","Every DPRK nuclear advance reinforces Beijing's willingness to shield nuclear proliferation when strategically convenient — a pattern that informs India's own reluctance to cap its nuclear deterrent. India's second-strike capability through the INS Arighaat submarine-launched ballistic missile programme is partly a response to the broader Asian nuclear environment, which includes both Chinese and Pakistani arsenals.","<blockquote>Yongbyon reprocessing is not ambiguous. It is weapons-grade plutonium separation. The only question is the timeline to the next test.</blockquote>"],faq:[{q:"What is Yongbyon?",a:"Yongbyon is North Korea's primary nuclear research complex, housing a plutonium-producing reactor, uranium enrichment facility and reprocessing laboratory for separating weapons-grade plutonium from spent fuel."},{q:"How does North Korea affect India's security?",a:"North Korea's nuclear advances embolden China and Pakistan, India's two nuclear-armed adversaries. They also stress the global non-proliferation regime that India operates within as a responsible nuclear power."},{q:"What is India's nuclear deterrent status?",a:"India maintains a credible minimum deterrent with a No First Use policy. The commissioning of INS Arighaat in 2026 has strengthened India's sea-based second-strike capability significantly."}],tags:["North Korea","DPRK","Yongbyon","IAEA","Nuclear","Plutonium","Non-Proliferation","India Nuclear","INS Arighaat"]}
+];
+
+/* ─── RENDER ─── */
+function cardHTML(a,small=false){
+  return `<div class="card" onclick="openArt(${a.id})">
+    <img class="card-img" src="${a.img}" alt="${a.imgAlt}" loading="lazy">
+    <div class="card-cat">${a.flag} ${a.cat}</div>
+    <div class="card-title">${a.title}</div>
+    ${small?'':` <div class="card-excerpt">${a.excerpt}</div>`}
+    <div class="card-foot"><span>${a.time} · ${a.read} min</span><span class="card-src">${a.sources[0].n}</span></div>
+  </div>`;
+}
+function lCardHTML(a){
+  return `<div class="lcard" onclick="openArt(${a.id})">
+    <img class="lcard-img" src="${a.img}" alt="${a.imgAlt}" loading="lazy">
+    <div><div class="lcard-cat">${a.flag} ${a.cat}</div><div class="lcard-title">${a.title}</div><div class="lcard-meta">${a.time} · ${a.read} min · ${a.sources[0].n}</div></div>
+  </div>`;
+}
+
+function renderFeed(){
+  document.getElementById('grid-top').innerHTML=ARTICLES.slice(1,3).map(a=>cardHTML(a)).join('');
+  document.getElementById('grid-mid').innerHTML=ARTICLES.slice(3,5).map(a=>cardHTML(a)).join('');
+  document.getElementById('list-feed').innerHTML=ARTICLES.slice(5).map(lCardHTML).join('');
+  document.getElementById('india-band').innerHTML=ARTICLES.filter(a=>a.cat==="India Defence").slice(0,3).map(a=>cardHTML(a,true)).join('');
+  document.getElementById('trending-list').innerHTML=[...ARTICLES].slice(0,5).map((a,i)=>`
+    <div class="trend" onclick="openArt(${a.id})">
+      <div class="trend-n">0${i+1}</div>
+      <div><div class="trend-t">${a.title.substring(0,62)}…</div><div class="trend-m">${a.time} · ${a.cat}</div></div>
+    </div>`).join('');
+  document.getElementById('sb-count').textContent=ARTICLES.length+" articles";
+  document.getElementById('sb-plag').textContent=ARTICLES.length+" / "+ARTICLES.length+" ✓";
+  document.getElementById('feed-time').textContent="Updated "+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+" IST";
+}
+
+/* ─── ARTICLE MODAL ─── */
+function openArt(id){
+  const a=ARTICLES.find(x=>x.id===id); if(!a) return;
+  document.getElementById('a-crumb').textContent=`HOME › ${a.cat.toUpperCase()}`;
+  const srcLinks=a.sources.map(s=>`<a href="${s.u}" target="_blank" rel="noopener">${s.n}</a>`).join(', ');
+  const bodyHTML=a.body.map(p=>p.startsWith('<')?p:`<p>${p}</p>`).join('');
+  const faqHTML=a.faq.map(f=>`<div class="faq-item"><div class="faq-q">Q: ${f.q}</div><div class="faq-a">${f.a}</div></div>`).join('');
+  const tagsHTML=a.tags.map(t=>`<span class="tag">#${t}</span>`).join('');
+  const shareURL=encodeURIComponent(`https://bharatdefence.site/${a.slug}/`);
+  const shareTitle=encodeURIComponent(a.title);
+  document.getElementById('a-body').innerHTML=`
+    <div class="a-cat">${a.flag} ${a.cat}</div>
+    <h1 class="a-title">${a.title}</h1>
+    <div class="a-meta">
+      <span>🕐 ${a.time}</span><span>·</span><span>⏱ ${a.read} min read</span>
+      <span class="orig-badge">✓ Originality ${a.orig}%</span>
+      <span class="seo-badge">SEO ${a.seo}/100</span>
+    </div>
+    <img class="a-img" src="${a.img}" alt="${a.imgAlt}">
+    <p class="a-img-cap">Representational image · Free licence (Unsplash)</p>
+    <div class="attr-box">
+      <div class="attr-label">📌 Source Attribution & Legal Notice</div>
+      <p>This article is an <strong>original AI-synthesised analysis</strong> compiled from: ${srcLinks}. All facts are attributed to original reporting. No verbatim text has been reproduced. BharatDefence.site operates under fair-use principles for news commentary. <a href="https://bharatdefence.site/editorial-policy/">Editorial Policy →</a></p>
+    </div>
+    <div class="a-text"><p class="a-lead">${a.excerpt}</p>${bodyHTML}</div>
+    <div class="ad-inline"><span style="font-size:9px;letter-spacing:.08em;text-transform:uppercase;">Advertisement</span><span>300×250 · Replace with Google AdSense code</span></div>
+    <div class="faq-sec"><div class="faq-head">Frequently Asked Questions</div>${faqHTML}</div>
+    <div class="share-bar">
+      <span class="share-lbl">Share:</span>
+      <button class="share-btn sb-tw" onclick="window.open('https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareURL}&via=BharatDefence','_blank','width=600,height=400')">🐦 Twitter</button>
+      <button class="share-btn sb-wa" onclick="window.open('https://wa.me/?text=${shareTitle}%20${shareURL}','_blank')">📱 WhatsApp</button>
+      <button class="share-btn sb-tg" onclick="window.open('https://t.me/share/url?url=${shareURL}&text=${shareTitle}','_blank')">✈️ Telegram</button>
+      <button class="share-btn sb-li" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=${shareURL}','_blank')">💼 LinkedIn</button>
+    </div>
+    <div class="a-tags">${tagsHTML}</div>`;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeArt(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeArt();});
+
+/* ─── NAV ─── */
+function navClick(el){document.querySelectorAll('.nav-a').forEach(n=>n.classList.remove('on'));el.classList.add('on');showHome();}
+function showHome(){document.getElementById('pg-home').style.display='block';}
+function showDash(){window.location.href='#dashboard';}
+
+/* ─── COUNTDOWN ─── */
+function updateCountdown(){
+  const now=new Date(),slots=[6,9,11,13,15,17,19,21,23];
+  const h=now.getHours();
+  let nextH=slots.find(s=>s>h)||slots[0];
+  const next=new Date(now);
+  if(nextH<=h)next.setDate(next.getDate()+1);
+  next.setHours(nextH,0,0,0);
+  const diff=next-now;
+  const mm=Math.floor((diff%3600000)/60000),ss=Math.floor((diff%60000)/1000);
+  const el=document.getElementById('sb-next');
+  if(el)el.textContent=`~${mm}m ${ss}s`;
+}
+setInterval(updateCountdown,1000);updateCountdown();
+
+/* ─── NEWSLETTER ─── */
+function subscribeNL(){
+  const v=document.getElementById('nl-email').value.trim();
+  const msg=document.getElementById('nl-msg');
+  if(!v||!v.includes('@')){msg.textContent='Please enter a valid email.';return;}
+  msg.textContent='✓ Subscribed! Check your inbox.';
+  document.getElementById('nl-email').value='';
+}
+
+/* ─── INIT ─── */
+renderFeed();
+</script>
+</body>
+</html>
 
