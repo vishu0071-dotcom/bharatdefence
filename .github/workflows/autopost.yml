@@ -8,6 +8,10 @@ on:
     - cron: '30 17 * * *'
   workflow_dispatch:
 
+# Give workflow permission to push back to repo
+permissions:
+  contents: write
+
 jobs:
   autopost:
     name: Generate and Publish Articles
@@ -45,14 +49,14 @@ jobs:
         run: |
           git config --local user.email "autobot@bharatdefence.site"
           git config --local user.name "BharatDefence AutoBot"
-          git add site/articles/ site/sitemap.xml
-          git diff --staged --quiet && echo "No new articles" || git commit -m "Auto-publish $(date +'%d %b %Y %H:%M IST')"
+          git add -A site/articles/ site/sitemap.xml
+          git diff --staged --quiet && echo "No new articles to commit" || git commit -m "Auto-publish $(date +'%d %b %Y %H:%M IST')"
 
       - name: Push to GitHub
-        uses: ad-m/github-push-action@v0.8.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+        run: |
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Ping Google sitemap
         run: |
