@@ -37,7 +37,7 @@ const CONFIG = {
   siteName:      "BharatDefence",
   siteDomain:    process.env.SITE_DOMAIN || "https://bharatdefence.site",
   twitterHandle: "@BharatDefence",
-  articlesPerRun: 4,
+  articlesPerRun: 6,  // increased to cover more breaking topics
   outputDir:     "../site/articles",
   sitemapFile:   "../site/sitemap.xml",
   geminiKey:     process.env.GEMINI_API_KEY || "",
@@ -48,12 +48,59 @@ const CONFIG = {
 };
 
 /* ══════════════════════════════════════
+   BREAKING / PRIORITY TOPICS
+   These get 3x relevance score boost
+   Update this list as world events change
+══════════════════════════════════════ */
+const BREAKING_TOPICS = [
+  // Israel - Iran War
+  "israel", "iran", "idf", "irgc", "tehran", "tel aviv", "iron dome",
+  "hezbollah", "hamas", "gaza", "west bank", "mossad", "netanyahu",
+  "iranian nuclear", "iran strike", "israel attack", "middle east war",
+
+  // Russia - Ukraine War
+  "russia", "ukraine", "putin", "zelensky", "kyiv", "moscow",
+  "nato ukraine", "russian army", "ukrainian forces", "zaporizhzhia",
+  "bakhmut", "kharkiv", "russian missile", "ukraine aid", "f-16 ukraine",
+  "black sea", "crimea", "donbas", "wagner",
+
+  // Pakistan & China vs India
+  "pakistan army", "pakistan china", "cpec", "pak air force", "ispr",
+  "loc ceasefire", "pakistan nuclear", "china pakistan", "j-10c",
+  "jf-17", "pakistan missile", "shaheen missile", "babur cruise",
+  "china india border", "lac", "galwan", "arunachal", "aksai chin",
+  "pla border", "china military india", "doklam", "china threat india",
+
+  // US in Bangladesh
+  "bangladesh", "dhaka", "yunus", "bangladesh military",
+  "us bangladesh", "india bangladesh", "bangladesh india relations",
+  "bangladesh coup", "hasina", "bangladesh crisis",
+
+  // Other high priority
+  "north korea missile", "kim jong", "dprk test",
+  "taiwan strait", "china taiwan", "pla taiwan",
+  "south china sea", "philippines china",
+  "houthi attack", "red sea attack", "shipping attack",
+];
+
+/* ══════════════════════════════════════
    18 FREE RSS SOURCES
 ══════════════════════════════════════ */
 const SOURCES = [
-  // Indian Government — official & free
-  { name: "PIB India",               url: "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",                                              tier: 1 },
+  // ── INDIAN OFFICIAL SOURCES (Tier 1 — highest priority) ──
+  { name: "PIB India (Defence)",     url: "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",                                              tier: 1 },
+  { name: "PIB India (All)",         url: "https://pib.gov.in/RssMain.aspx",                                                                     tier: 1 },
   { name: "Indian MoD",              url: "https://mod.gov.in/rss.xml",                                                                          tier: 1 },
+  { name: "MoD Press Releases",      url: "https://mod.gov.in/press-release/rss.xml",                                                            tier: 1 },
+  { name: "DRDO",                    url: "https://www.drdo.gov.in/rss.xml",                                                                     tier: 1 },
+  { name: "Indian Navy",             url: "https://www.indiannavy.nic.in/rss.xml",                                                               tier: 1 },
+  { name: "Indian Army",             url: "https://indianarmy.nic.in/rss.xml",                                                                   tier: 1 },
+  { name: "Indian Air Force",        url: "https://indianairforce.nic.in/rss.xml",                                                               tier: 1 },
+  { name: "Google News MoD",         url: "https://news.google.com/rss/search?q=site:mod.gov.in+OR+Ministry+of+Defence+India&hl=en-IN&gl=IN&ceid=IN:en", tier: 1 },
+  { name: "Google News DRDO",        url: "https://news.google.com/rss/search?q=DRDO+India+defence+technology&hl=en-IN&gl=IN&ceid=IN:en",        tier: 1 },
+  { name: "Google News Indian Army", url: "https://news.google.com/rss/search?q=Indian+Army+news&hl=en-IN&gl=IN&ceid=IN:en",                    tier: 1 },
+  { name: "Google News Indian Navy", url: "https://news.google.com/rss/search?q=Indian+Navy+news&hl=en-IN&gl=IN&ceid=IN:en",                    tier: 1 },
+  { name: "Google News IAF",         url: "https://news.google.com/rss/search?q=Indian+Air+Force+news&hl=en-IN&gl=IN&ceid=IN:en",               tier: 1 },
   // Wire Services
   { name: "Reuters World",           url: "https://feeds.reuters.com/reuters/worldNews",                                                          tier: 1 },
   { name: "AP News",                 url: "https://rsshub.app/apnews/topics/apf-intlnews",                                                       tier: 1 },
@@ -75,16 +122,22 @@ const SOURCES = [
   // Google News RSS — free, no key
   { name: "Google News India",       url: "https://news.google.com/rss/search?q=india+defence+military&hl=en-IN&gl=IN&ceid=IN:en",              tier: 2 },
   { name: "Google News NATO",        url: "https://news.google.com/rss/search?q=NATO+military+security&hl=en&gl=US&ceid=US:en",                 tier: 2 },
-  { name: "Google News Geopolitics", url: "https://news.google.com/rss/search?q=geopolitics+war+conflict+Asia&hl=en&gl=IN&ceid=IN:en",          tier: 2 },
+  { name: "Google News Geopolitics",   url: "https://news.google.com/rss/search?q=geopolitics+war+conflict+Asia&hl=en&gl=IN&ceid=IN:en",          tier: 2 },
+  { name: "Google News Israel Iran",    url: "https://news.google.com/rss/search?q=Israel+Iran+war+strike&hl=en-IN&gl=IN&ceid=IN:en",                  tier: 1 },
+  { name: "Google News Russia Ukraine", url: "https://news.google.com/rss/search?q=Russia+Ukraine+war+military&hl=en-IN&gl=IN&ceid=IN:en",             tier: 1 },
+  { name: "Google News Pakistan China", url: "https://news.google.com/rss/search?q=Pakistan+China+India+military&hl=en-IN&gl=IN&ceid=IN:en",           tier: 1 },
+  { name: "Google News Bangladesh",     url: "https://news.google.com/rss/search?q=Bangladesh+India+US+military&hl=en-IN&gl=IN&ceid=IN:en",            tier: 1 },
+  { name: "Google News Taiwan",         url: "https://news.google.com/rss/search?q=Taiwan+China+PLA+military&hl=en-IN&gl=IN&ceid=IN:en",               tier: 1 },
+  { name: "Google News Houthi",         url: "https://news.google.com/rss/search?q=Houthi+Red+Sea+Yemen+attack&hl=en-IN&gl=IN&ceid=IN:en",             tier: 1 },
+  { name: "Google News DPRK",           url: "https://news.google.com/rss/search?q=North+Korea+DPRK+missile+nuclear&hl=en-IN&gl=IN&ceid=IN:en",        tier: 1 },
 ];
-
 const GDELT_URL = "https://api.gdeltproject.org/api/v2/doc/doc?query=india+defence+OR+military+OR+geopolitics&mode=artlist&maxrecords=10&format=json";
 
 /* ══════════════════════════════════════
    CATEGORIES & KEYWORDS
 ══════════════════════════════════════ */
 const CATEGORIES = {
-  "India Defence":         ["india", "iaf", "indian navy", "indian army", "drdo", "hal", "tejas", "brahmos", "pib", "mod india", "ins ", "agni", "akash", "rafale india", "amca", "arighaat"],
+  "India Defence":         ["india", "iaf", "indian navy", "indian army", "drdo", "hal", "tejas", "brahmos", "pib", "mod india", "ins ", "agni", "akash", "rafale india", "amca", "arighaat", "ministry of defence", "raksha mantri", "rajnath", "defence acquisition", "defence procurement", "make in india defence", "atmanirbhar", "defence production", "coast guard india", "para sf", "special forces india", "defence deal", "defence contract", "defence budget", "ordnance", "bharat forge", "mahindra defence", "tata defence", "l&t defence"],
   "NATO & Alliances":      ["nato", "article 5", "article 4", "transatlantic", "pentagon", "us dod", "us army", "us air force", "allied forces"],
   "Asia-Pacific":          ["china", "pla", "taiwan", "south china sea", "japan", "south korea", "asean", "indo-pacific", "quad", "australia defence"],
   "Pakistan & South Asia": ["pakistan", "ispr", "pak army", "j-10", "j-35", "jf-17", "loc", "kashmir", "bangladesh", "sri lanka military"],
@@ -153,6 +206,29 @@ async function collectNews() {
     }
   } catch (e) { console.log(`  ✗ GDELT: ${e.message}`); }
 
+  // MoD India — direct page scraping as backup
+  try {
+    const modRes = await axios.get("https://mod.gov.in/", {
+      timeout: 10000,
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; BharatDefenceBot/1.0)" }
+    });
+    const html = modRes.data;
+    // Extract links and text from MoD homepage
+    const matches = [...html.matchAll(/href="([^"]*)"[^>]*>([^<]{20,150})</g)];
+    matches.slice(0, 15).forEach(m => {
+      const title = m[2].trim().replace(/\s+/g, " ");
+      const url   = m[1].startsWith("http") ? m[1] : "https://mod.gov.in" + m[1];
+      if (title.length > 25 && !title.includes("{") && !title.includes("function")) {
+        all.push({
+          title, summary: title, url,
+          published: new Date().toISOString(),
+          sourceName: "Indian MoD (Direct)", sourceTier: 1,
+        });
+      }
+    });
+    console.log("  ✓ MoD India direct: scraped homepage");
+  } catch (e) { console.log("  ✗ MoD India direct: " + e.message); }
+
   // NewsAPI — 100 req/day free
   if (CONFIG.newsApiKey) {
     try {
@@ -188,7 +264,15 @@ function filterAndCluster(stories) {
         const score = kws.filter(kw => text.includes(kw)).length;
         if (score > bestScore) { bestScore = score; bestCat = cat; }
       }
-      return bestCat ? { ...s, category: bestCat, relevance: bestScore } : null;
+
+      // BREAKING TOPIC BOOST — 3x score for hot topics
+      const breakingScore = BREAKING_TOPICS.filter(kw => text.includes(kw)).length;
+      const finalScore = bestScore + (breakingScore * 3);
+
+      // Mark as breaking if score is high enough
+      const isBreaking = breakingScore >= 2;
+
+      return bestCat ? { ...s, category: bestCat, relevance: finalScore, isBreaking } : null;
     })
     .filter(Boolean)
     .sort((a, b) => b.relevance - a.relevance);
@@ -202,11 +286,26 @@ function filterAndCluster(stories) {
     return true;
   });
 
-  // Balance across categories
-  const clusters = {};
-  unique.forEach(s => { if (!clusters[s.category]) clusters[s.category] = []; clusters[s.category].push(s); });
+  // Separate breaking news from regular stories
+  const breaking = unique.filter(s => s.isBreaking);
+  const regular  = unique.filter(s => !s.isBreaking);
+
+  console.log(`  🔥 Breaking topics found: ${breaking.length}`);
+  console.log(`  📰 Regular stories found: ${regular.length}`);
+
+  // Always pick breaking news first (up to half the slots)
+  const breakingSlots = Math.min(breaking.length, Math.ceil(CONFIG.articlesPerRun / 2));
+  const regularSlots  = CONFIG.articlesPerRun - breakingSlots;
+
   const picks = [];
-  const cats  = Object.keys(clusters);
+
+  // Add top breaking stories first
+  breaking.slice(0, breakingSlots).forEach(s => picks.push(s));
+
+  // Balance remaining slots across categories
+  const clusters = {};
+  regular.forEach(s => { if (!clusters[s.category]) clusters[s.category] = []; clusters[s.category].push(s); });
+  const cats = Object.keys(clusters);
   let i = 0;
   while (picks.length < CONFIG.articlesPerRun) {
     const cat = cats[i % cats.length];
@@ -227,9 +326,13 @@ async function generateArticle(story) {
   console.log(`\n🤖 Gemini generating: ${story.title.substring(0, 55)}…`);
   const catKws = SEO_KEYWORDS[story.category] || [];
 
+  const isBreaking = story.isBreaking ? "⚡ BREAKING/DEVELOPING STORY — treat with urgency" : "Regular story";
+
   const prompt = `You are a senior defence journalist at BharatDefence.site — India's leading defence intelligence portal.
 
 Write an original SEO-optimised news analysis article from this story.
+
+STORY PRIORITY: ${isBreaking}
 
 SOURCE:
 Title: ${story.title}
@@ -722,4 +825,3 @@ async function run() {
 }
 
 run().catch(console.error);
-
