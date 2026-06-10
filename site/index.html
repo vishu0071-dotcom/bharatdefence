@@ -1295,14 +1295,14 @@ const SITE = 'https://bharatdefence.site';
 
 /* ─── FALLBACK IMAGES per category ─── */
 const CAT_IMAGES = {
-  'India Defence':         'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&fit=crop',
-  'NATO & Alliances':      'https://images.unsplash.com/photo-1541185934-01b600ea069c?w=1200&q=80&fit=crop',
-  'Asia-Pacific':          'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80&fit=crop',
-  'Pakistan & South Asia': 'https://images.unsplash.com/photo-1555521144-cfed56b47e59?w=1200&q=80&fit=crop',
-  'Middle East':           'https://images.unsplash.com/photo-1579482800619-8f92a891aced?w=1200&q=80&fit=crop',
-  'Cyber & Intelligence':  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&fit=crop',
-  'Nuclear Affairs':       'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=1200&q=80&fit=crop',
-  'Defence Technology':    'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=1200&q=80&fit=crop',
+  'India Defence':         'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg/1200px-INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg',
+  'NATO & Alliances':      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/F-16_June_2008.jpg/1200px-F-16_June_2008.jpg',
+  'Asia-Pacific':          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Chinese_Type_052D_destroyer.jpg/1200px-Chinese_Type_052D_destroyer.jpg',
+  'Pakistan & South Asia': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/JF-17_Thunder_2009.jpg/1200px-JF-17_Thunder_2009.jpg',
+  'Middle East':           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/F-35I_Adir_Israeli_Air_Force.jpg/1200px-F-35I_Adir_Israeli_Air_Force.jpg',
+  'Cyber & Intelligence':  'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_IT_Network.png/1200px-Simple_IT_Network.png',
+  'Nuclear Affairs':       'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Minuteman_III_ICBM_launch.jpg/800px-Minuteman_III_ICBM_launch.jpg',
+  'Defence Technology':    'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MQ-9_Reaper_in_flight_%28cropped%29.jpg/1200px-MQ-9_Reaper_in_flight_%28cropped%29.jpg',
 };
 
 /* ─── BREAKING KEYWORDS ─── */
@@ -1624,7 +1624,7 @@ function subscribeNL() {
 /* ─── DEMO ARTICLES (shown before real ones load) ─── */
 function getDemoArticles() {
   return [
-    { slug:'ins-vikrant-air-wing-2026', title:'INS Vikrant Air Wing Expansion Signals Blue-Water Carrier Ambition', category:'India Defence', image:CAT_IMAGES['India Defence'], lead:'India\'s first indigenous carrier set to expand air wing with LCA-Navy fighters.', sources:['PIB India','Reuters'], readingTime:8, wordCount:820, publishedISO:new Date(Date.now()-900000).toISOString(), tags:['INS Vikrant','Indian Navy'], origScore:96 },
+    { slug:'ins-vikrant-air-wing-2026', title:'INS Vikrant Air Wing Expansion Signals Blue-Water Carrier Ambition', category:'India Defence', image:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg/1200px-INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg', lead:'India\'s first indigenous carrier set to expand air wing with LCA-Navy fighters.', sources:['PIB India','Reuters'], readingTime:8, wordCount:820, publishedISO:new Date(Date.now()-900000).toISOString(), tags:['INS Vikrant','Indian Navy'], origScore:96 },
     { slug:'israel-iran-strike-2026', title:'Israel Conducts Precision Strikes on Iranian Nuclear Facilities', category:'Middle East', image:CAT_IMAGES['Middle East'], lead:'Israeli Air Force F-35Is conduct overnight strikes on Natanz enrichment facility.', sources:['Reuters','AP News'], readingTime:6, wordCount:720, publishedISO:new Date(Date.now()-1800000).toISOString(), tags:['Israel','Iran','Strike'], origScore:97, isBreaking:true },
     { slug:'russia-ukraine-latest-2026', title:'Ukraine F-16 Squadron Engages Russian Su-35 Fleet Over Kharkiv', category:'NATO & Alliances', image:CAT_IMAGES['NATO & Alliances'], lead:'Ukrainian Air Force F-16s in first major air battle against Russian fighter jets.', sources:['Reuters','Defense News'], readingTime:5, wordCount:680, publishedISO:new Date(Date.now()-3600000).toISOString(), tags:['Ukraine','Russia','F-16'], origScore:95, isBreaking:true },
     { slug:'pakistan-j35a-2026', title:'Pakistan J-35A Induction Shifts South Asian Air Power Balance vs India', category:'Pakistan & South Asia', image:CAT_IMAGES['Pakistan & South Asia'], lead:'Pakistan receives first J-35A stealth fighters from China, challenging IAF superiority.', sources:['Jane\'s','Reuters'], readingTime:6, wordCount:750, publishedISO:new Date(Date.now()-7200000).toISOString(), tags:['Pakistan','J-35A','China'], origScore:95, isBreaking:true },
