@@ -1295,14 +1295,14 @@ const SITE = 'https://bharatdefence.site';
 
 /* ─── FALLBACK IMAGES per category ─── */
 const CAT_IMAGES = {
-  'India Defence':         'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80',
-  'NATO & Alliances':      'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=1200&q=80',
-  'Asia-Pacific':          'https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&q=80',
-  'Pakistan & South Asia': 'https://images.unsplash.com/photo-1622227056993-6e06f8552b15?w=1200&q=80',
-  'Middle East':           'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1200&q=80',
-  'Cyber & Intelligence':  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
-  'Nuclear Affairs':       'https://images.unsplash.com/photo-1547481887-a26e2cacb5b2?w=1200&q=80',
-  'Defence Technology':    'https://images.unsplash.com/photo-1569025591153-ff2f4e66e88f?w=1200&q=80',
+  'India Defence':         'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&fit=crop',
+  'NATO & Alliances':      'https://images.unsplash.com/photo-1541185934-01b600ea069c?w=1200&q=80&fit=crop',
+  'Asia-Pacific':          'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80&fit=crop',
+  'Pakistan & South Asia': 'https://images.unsplash.com/photo-1555521144-cfed56b47e59?w=1200&q=80&fit=crop',
+  'Middle East':           'https://images.unsplash.com/photo-1579482800619-8f92a891aced?w=1200&q=80&fit=crop',
+  'Cyber & Intelligence':  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&fit=crop',
+  'Nuclear Affairs':       'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=1200&q=80&fit=crop',
+  'Defence Technology':    'https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?w=1200&q=80&fit=crop',
 };
 
 /* ─── BREAKING KEYWORDS ─── */
@@ -1323,17 +1323,34 @@ function timeAgo(iso) {
 
 /* ─── LOAD ARTICLES FROM index.json ─── */
 async function loadArticles() {
-  try {
-    const res = await fetch('/articles/index.json?t=' + Date.now());
-    if (!res.ok) throw new Error('Not found');
-    ALL_ARTICLES = await res.json();
-    console.log(`✅ Loaded ${ALL_ARTICLES.length} articles`);
-    renderAll();
-  } catch(e) {
-    console.warn('index.json not found, using demo articles:', e.message);
-    ALL_ARTICLES = getDemoArticles();
-    renderAll();
+  // Try multiple paths for the articles feed
+  const paths = [
+    '/articles/index.json',
+    './articles/index.json',
+    'articles/index.json'
+  ];
+  
+  for (const path of paths) {
+    try {
+      const res = await fetch(path + '?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.length > 0) {
+          ALL_ARTICLES = data;
+          console.log('✅ Loaded ' + ALL_ARTICLES.length + ' articles from ' + path);
+          renderAll();
+          return;
+        }
+      }
+    } catch(e) {
+      console.warn('Failed ' + path + ':', e.message);
+    }
   }
+  
+  // Use demo articles as fallback
+  console.warn('Using demo articles - run automation to generate real ones');
+  ALL_ARTICLES = getDemoArticles();
+  renderAll();
 }
 
 /* ─── FILTER BY CATEGORY ─── */
@@ -1613,7 +1630,13 @@ function getDemoArticles() {
     { slug:'pakistan-j35a-2026', title:'Pakistan J-35A Induction Shifts South Asian Air Power Balance vs India', category:'Pakistan & South Asia', image:CAT_IMAGES['Pakistan & South Asia'], lead:'Pakistan receives first J-35A stealth fighters from China, challenging IAF superiority.', sources:['Jane\'s','Reuters'], readingTime:6, wordCount:750, publishedISO:new Date(Date.now()-7200000).toISOString(), tags:['Pakistan','J-35A','China'], origScore:95, isBreaking:true },
     { slug:'drdo-tejas-mk2-2026', title:'TEJAS Mk2 Full Weapons Integration Milestone — IAF Induction on Track', category:'India Defence', image:CAT_IMAGES['India Defence'], lead:'DRDO achieves critical weapons integration on TEJAS Mk2 clearing IAF induction path.', sources:['PIB India','IDSA'], readingTime:6, wordCount:730, publishedISO:new Date(Date.now()-10800000).toISOString(), tags:['TEJAS Mk2','DRDO','IAF'], origScore:95 },
     { slug:'bangladesh-us-india-2026', title:'US Military Presence in Bangladesh Raises Strategic Concerns for India', category:'Pakistan & South Asia', image:CAT_IMAGES['Pakistan & South Asia'], lead:'Dhaka-Washington defence cooperation deepens amid growing Indian strategic anxiety.', sources:['The Diplomat','Reuters'], readingTime:7, wordCount:800, publishedISO:new Date(Date.now()-14400000).toISOString(), tags:['Bangladesh','US','India'], origScore:96, isBreaking:true },
-    { slug:'china-type003-carrier-2026', title:"China's Third Type-003 Carrier Confirms Three-Group Strike Ambition", category:'Asia-Pacific', image:CAT_IMAGES['Asia-Pacific'], lead:'Satellite imagery confirms third Fujian-class carrier keel at Jiangnan Shipyard.', sources:['Jane\'s','USNI News'], readingTime:6, wordCount:710, publishedISO:new Date(Date.now()-18000000).toISOString(), tags:['China','Type-003','PLAN'], origScore:95 },
+    { slug:'china-type003-carrier-2026', title:"China's Third Type-003 Carrier Confirms Three-Group Strike Ambition", category:'Asia-Pacific', image:CAT_IMAGES['Asia-Pacific'], lead:'Satellite imagery confirms third Fujian-class carrier keel at Jiangnan Shipyard.', sources:["Jane's",'USNI News'], readingTime:6, wordCount:710, publishedISO:new Date(Date.now()-18000000).toISOString(), tags:['China','Type-003','PLAN'], origScore:95 },
+    { slug:'apt41-nato-cyber-2026', title:'APT41 Cyber Campaign Targets NATO Critical Infrastructure in Five Countries', category:'Cyber & Intelligence', image:CAT_IMAGES['Cyber & Intelligence'], lead:'Mandiant attributes sophisticated pre-positioning campaign against power and telecoms to Chinese state-sponsored APT41.', sources:['Mandiant','Wired'], readingTime:7, wordCount:780, publishedISO:new Date(Date.now()-21600000).toISOString(), tags:['APT41','Cyber','China','NATO'], origScore:96, isBreaking:true },
+    { slug:'india-cyber-defence-2026', title:"India's NCIIPC Intercepts 3,200 Cyberattacks on Critical Infrastructure in Q1 2026", category:'Cyber & Intelligence', image:CAT_IMAGES['Cyber & Intelligence'], lead:'National Critical Information Infrastructure Protection Centre reports record cyber intrusion attempts targeting power grids and defence networks.', sources:['PIB India','CERT-In'], readingTime:5, wordCount:650, publishedISO:new Date(Date.now()-25200000).toISOString(), tags:['NCIIPC','Cyber','India'], origScore:95 },
+    { slug:'iaea-dprk-yongbyon-2026', title:'IAEA Emergency Board Convenes Over North Korea Yongbyon Plutonium Activity', category:'Nuclear Affairs', image:CAT_IMAGES['Nuclear Affairs'], lead:'Commercial satellite imagery confirms resumed plutonium reprocessing at Yongbyon raising fears of seventh nuclear test.', sources:['38 North','Reuters'], readingTime:8, wordCount:820, publishedISO:new Date(Date.now()-28800000).toISOString(), tags:['DPRK','IAEA','Nuclear','Yongbyon'], origScore:97, isBreaking:true },
+    { slug:'india-nuclear-arighaat-2026', title:'INS Arighaat Completes First Strategic Patrol — India Second-Strike Capability Operational', category:'Nuclear Affairs', image:CAT_IMAGES['Nuclear Affairs'], lead:"India's second nuclear ballistic missile submarine completes maiden deterrence patrol solidifying No First Use doctrine.", sources:['PIB India','IDSA'], readingTime:6, wordCount:730, publishedISO:new Date(Date.now()-32400000).toISOString(), tags:['INS Arighaat','Nuclear','Indian Navy'], origScore:96 },
+    { slug:'india-hypersonic-2026', title:'DRDO Successfully Tests Hypersonic Technology Demonstrator Vehicle at Mach 6', category:'Defence Technology', image:CAT_IMAGES['Defence Technology'], lead:'India joins exclusive club of nations with hypersonic capability as DRDO HSTDV reaches Mach 6 in controlled test.', sources:['PIB India','DRDO'], readingTime:5, wordCount:680, publishedISO:new Date(Date.now()-36000000).toISOString(), tags:['DRDO','Hypersonic','HSTDV','India'], origScore:95 },
+    { slug:'drone-warfare-ukraine-2026', title:'FPV Drone Swarms Redefine Warfare as Ukraine Deploys 10,000 Units Daily', category:'Defence Technology', image:CAT_IMAGES['Defence Technology'], lead:"Ukraine's mass drone deployment strategy offers Indian military planners key lessons for mountain and border warfare.", sources:['Defense News','Breaking Defense'], readingTime:6, wordCount:720, publishedISO:new Date(Date.now()-39600000).toISOString(), tags:['Drone','FPV','Ukraine','Warfare Technology'], origScore:94 },
   ];
 }
 
