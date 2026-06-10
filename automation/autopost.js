@@ -131,7 +131,7 @@ const SOURCES = [
   { name: "Google News Houthi",         url: "https://news.google.com/rss/search?q=Houthi+Red+Sea+Yemen+attack&hl=en-IN&gl=IN&ceid=IN:en",             tier: 1 },
   { name: "Google News DPRK",           url: "https://news.google.com/rss/search?q=North+Korea+DPRK+missile+nuclear&hl=en-IN&gl=IN&ceid=IN:en",        tier: 1 },
 ];
-const GDELT_URL = "https://api.gdeltproject.org/api/v2/doc/doc?query=india+defence+OR+military+OR+geopolitics&mode=artlist&maxrecords=10&format=json";
+const GDELT_URL = "https://api.gdeltproject.org/api/v2/doc/doc?query=india+defence+OR+military+OR+Israel+Iran+OR+Russia+Ukraine+OR+Pakistan+China+OR+DRDO+OR+Bangladesh&mode=artlist&maxrecords=15&format=json";
 
 /* ══════════════════════════════════════
    CATEGORIES & KEYWORDS
@@ -159,14 +159,14 @@ const SEO_KEYWORDS = {
 };
 
 const FALLBACK_IMAGES = {
-  "India Defence":         "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80",
-  "NATO & Alliances":      "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=1200&q=80",
-  "Asia-Pacific":          "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&q=80",
-  "Pakistan & South Asia": "https://images.unsplash.com/photo-1622227056993-6e06f8552b15?w=1200&q=80",
-  "Middle East":           "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1200&q=80",
-  "Cyber & Intelligence":  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
-  "Nuclear Affairs":       "https://images.unsplash.com/photo-1547481887-a26e2cacb5b2?w=1200&q=80",
-  "Defence Technology":    "https://images.unsplash.com/photo-1569025591153-ff2f4e66e88f?w=1200&q=80",
+  "India Defence":         "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg/1200px-INS_Vikrant_%28IAC-1%29_during_sea_trials.jpg",
+  "NATO & Alliances":      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/F-16_June_2008.jpg/1200px-F-16_June_2008.jpg",
+  "Asia-Pacific":          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Chinese_Type_052D_destroyer.jpg/1200px-Chinese_Type_052D_destroyer.jpg",
+  "Pakistan & South Asia": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/JF-17_Thunder_2009.jpg/1200px-JF-17_Thunder_2009.jpg",
+  "Middle East":           "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/F-35I_Adir_Israeli_Air_Force.jpg/1200px-F-35I_Adir_Israeli_Air_Force.jpg",
+  "Cyber & Intelligence":  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Simple_IT_Network.png/1200px-Simple_IT_Network.png",
+  "Nuclear Affairs":       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Minuteman_III_ICBM_launch.jpg/800px-Minuteman_III_ICBM_launch.jpg",
+  "Defence Technology":    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/MQ-9_Reaper_in_flight_%28cropped%29.jpg/1200px-MQ-9_Reaper_in_flight_%28cropped%29.jpg",
 };
 
 /* ══════════════════════════════════════
@@ -206,28 +206,53 @@ async function collectNews() {
     }
   } catch (e) { console.log(`  ✗ GDELT: ${e.message}`); }
 
-  // MoD India — direct page scraping as backup
-  try {
-    const modRes = await axios.get("https://mod.gov.in/", {
-      timeout: 10000,
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; BharatDefenceBot/1.0)" }
-    });
-    const html = modRes.data;
-    // Extract links and text from MoD homepage
-    const matches = [...html.matchAll(/href="([^"]*)"[^>]*>([^<]{20,150})</g)];
-    matches.slice(0, 15).forEach(m => {
-      const title = m[2].trim().replace(/\s+/g, " ");
-      const url   = m[1].startsWith("http") ? m[1] : "https://mod.gov.in" + m[1];
-      if (title.length > 25 && !title.includes("{") && !title.includes("function")) {
-        all.push({
-          title, summary: title, url,
-          published: new Date().toISOString(),
-          sourceName: "Indian MoD (Direct)", sourceTier: 1,
+  // MoD India — direct scraping with multiple pages
+  const modPages = [
+    { url: "https://mod.gov.in/", name: "MoD Homepage" },
+    { url: "https://mod.gov.in/press-release", name: "MoD Press Releases" },
+    { url: "https://www.drdo.gov.in/press-release", name: "DRDO Press Releases" },
+    { url: "https://pib.gov.in/allRel.aspx", name: "PIB All Releases" },
+  ];
+  
+  for (const page of modPages) {
+    try {
+      const modRes = await axios.get(page.url, {
+        timeout: 12000,
+        headers: { 
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          "Accept": "text/html,application/xhtml+xml",
+          "Accept-Language": "en-IN,en;q=0.9",
+        }
+      });
+      const html = modRes.data;
+      // Extract headlines - look for news/press release patterns
+      const patterns = [
+        /class="[^"]*(?:news|press|title|heading|release)[^"]*"[^>]*>([^<]{25,200})</gi,
+        /<h[2-4][^>]*>([^<]{25,200})<\/h[2-4]>/gi,
+        /href="([^"]*(?:press|release|news)[^"]*)"[^>]*>([^<]{25,200})</gi,
+      ];
+      let found = 0;
+      for (const pattern of patterns) {
+        const matches = [...html.matchAll(pattern)];
+        matches.slice(0, 8).forEach(m => {
+          const title = (m[2] || m[1] || '').trim().replace(/\s+/g, " ").replace(/<[^>]+>/g,'');
+          if (title.length > 30 && title.length < 250 && !title.includes('{') && !title.includes('function') && !title.includes('var ')) {
+            all.push({
+              title, summary: title, url: page.url,
+              published: new Date().toISOString(),
+              sourceName: page.name, sourceTier: 1,
+            });
+            found++;
+          }
         });
+        if (found >= 5) break;
       }
-    });
-    console.log("  ✓ MoD India direct: scraped homepage");
-  } catch (e) { console.log("  ✗ MoD India direct: " + e.message); }
+      if (found > 0) console.log("  ✓ " + page.name + ": " + found + " stories");
+      else console.log("  ℹ " + page.name + ": no stories extracted");
+    } catch (e) { 
+      console.log("  ✗ " + page.name + ": " + e.message); 
+    }
+  }
 
   // NewsAPI — 100 req/day free
   if (CONFIG.newsApiKey) {
