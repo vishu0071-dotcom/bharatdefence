@@ -8,7 +8,6 @@ on:
     - cron: '30 17 * * *'
   workflow_dispatch:
 
-# Give workflow permission to push back to repo
 permissions:
   contents: write
 
@@ -36,6 +35,12 @@ jobs:
         working-directory: automation
         run: npm install
 
+      - name: Create required folders
+        run: |
+          mkdir -p site/articles
+          ls -la site/
+          echo "Articles folder ready"
+
       - name: Run AI article engine
         working-directory: automation
         env:
@@ -45,21 +50,33 @@ jobs:
           SITE_DOMAIN: ${{ secrets.SITE_DOMAIN }}
         run: node autopost.js
 
+      - name: Show generated files
+        run: |
+          echo "=== Files in site/articles/ ==="
+          ls -la site/articles/ || echo "No articles folder"
+          echo "=== index.json exists? ==="
+          ls -la site/articles/index.json || echo "NO index.json found!"
+          echo "=== Article folders ==="
+          ls -d site/articles/*/ 2>/dev/null | head -10 || echo "No article folders"
+
       - name: Commit new articles
         run: |
           git config --local user.email "autobot@bharatdefence.site"
           git config --local user.name "BharatDefence AutoBot"
-          git add -A site/articles/ site/sitemap.xml
-          git diff --staged --quiet && echo "No new articles to commit" || git commit -m "Auto-publish $(date +'%d %b %Y %H:%M IST')"
+          git status
+          git add -A site/articles/
+          git add -A site/sitemap.xml
+          git status
+          git diff --staged --quiet && echo "Nothing to commit" || git commit -m "Auto-publish $(date +'%d %b %Y %H:%M IST')"
 
       - name: Push to GitHub
         run: |
           git push origin main
+          echo "Push complete"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Ping Google sitemap
+      - name: Ping Google
         run: |
-          sleep 20
           curl -s "https://www.google.com/ping?sitemap=https://bharatdefence.site/sitemap.xml" || true
           echo "Done"
