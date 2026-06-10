@@ -625,7 +625,13 @@ function buildArticleHTML(data, image, origScore) {
 
 <div style="max-width:780px;margin:0 auto;padding:0 1.5rem;">
   <p class="ad-lbl">Advertisement</p>
-  <div class="ad-slot">728×90 Leaderboard · Replace with Google AdSense after approval</div>
+  <ins class="adsbygoogle"
+       style="display:block;min-height:90px;"
+       data-ad-client="ca-pub-8400475474079471"
+       data-ad-slot="auto"
+       data-ad-format="horizontal"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
 <article class="wrap" itemscope itemtype="https://schema.org/NewsArticle">
@@ -668,7 +674,13 @@ function buildArticleHTML(data, image, origScore) {
   </div>
 
   <p class="ad-lbl">Advertisement</p>
-  <div class="ad-slot" style="min-height:90px;">300×250 · Replace with Google AdSense</div>
+  <ins class="adsbygoogle"
+       style="display:block;min-height:250px;"
+       data-ad-client="ca-pub-8400475474079471"
+       data-ad-slot="auto"
+       data-ad-format="rectangle"
+       data-full-width-responsive="false"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
   <section class="faq-sec" itemscope itemtype="https://schema.org/FAQPage">
     <h2 class="faq-title">Frequently Asked Questions</h2>
@@ -694,7 +706,13 @@ function buildArticleHTML(data, image, origScore) {
   </div>
 
   <p class="ad-lbl" style="margin-top:2rem;">Advertisement</p>
-  <div class="ad-slot" style="min-height:90px;">728×90 · Replace with Google AdSense</div>
+  <ins class="adsbygoogle"
+       style="display:block;min-height:90px;"
+       data-ad-client="ca-pub-8400475474079471"
+       data-ad-slot="auto"
+       data-ad-format="horizontal"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </article>
 
 <div class="art-footer">
